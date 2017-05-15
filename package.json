@@ -1,0 +1,36 @@
+{
+  "name": "shoppingcart",
+  "version": "1.0.0",
+  "description": "a shopping cart project for andela bootcamp week 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Efosaok/ShoppingCart.git"
+  },
+  "author": "Efosa Okpugie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Efosaok/ShoppingCart/issues"
+  },
+  "homepage": "https://github.com/Efosaok/ShoppingCart#readme",
+   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.2",
+    "express-validator": "^3.2.0",
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.9.9",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
