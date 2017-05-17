@@ -19,7 +19,7 @@ const users = require('./routes/users');
 // Init App
 const app = express();
 //connect to mongoDB
-mongoose.connect('mongodb://localhost:27017/ShoppingCart');
+mongoose.connect("mongodb://efosaokpugie:swampious88@ds143231.mlab.com:43231/shoppp");
 const db = mongoose.connection;
 
 

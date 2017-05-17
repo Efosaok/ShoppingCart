@@ -128,12 +128,12 @@ router.get("/additem/:id",(req,res)=>{
 		}
 	})	
 })
-router.get('/shopping-cart', function(req, res, next) {
+router.get('/shopping-cart',(req, res, next)=> {
    if (!req.session.cart) {
        return res.render('/users/shopping', {products: null});
    } 
-    var cart = new Cart(req.session.cart);
-    res.render('/users/shopping', {products: cart.generateArray(), totalPrice: cart.totalPrice});
+    let cart = new Cart(req.session.cart);
+    res.render('/users/shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice});
 });
 
 

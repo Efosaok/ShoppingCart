@@ -3,7 +3,7 @@ const Product = require("../models/appproduct.js");
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/ShoppingCart');
+mongoose.connect("mongodb://efosaokpugie:swampious88@ds143231.mlab.com:43231/shoppp");
 
 const products = [
 	new Product({
