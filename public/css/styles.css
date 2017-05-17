@@ -77,3 +77,8 @@ body {
     border-bottom: 0;
   }
 }
+
+footer {
+  margin-top: 15%;
+  background-color:gray;
+}
