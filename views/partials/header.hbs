@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><span class="glyphicons glyphicons-parents"></span></a>
+            <a class="navbar-brand" href="/"><span class="glyphicons glyphicons-parents" style="color:gray">E-CART</span></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,8 +16,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/shopping-cart/">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="glyphicons glyphicons-shopping-cart"></span>
-                        <span class="badge">{{session.cart.totalQty}}</span>
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="glyphicons glyphicons-parents">></span>
+                        <span class="badge">no. of items:{{session.cart.totalQty}}</span>
                     </a>
                 </li>
                 <li class="dropdown">
