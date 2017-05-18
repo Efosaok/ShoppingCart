@@ -13,14 +13,15 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const MongoStore = require("connect-mongo")(session);
-const routes = require('./routes/index');
-const users = require('./routes/users');
 
 // Init App
 const app = express();
 //connect to mongoDB
 mongoose.connect("mongodb://efosaokpugie:swampious88@ds143231.mlab.com:43231/shoppp");
 const db = mongoose.connection;
+
+const routes = require('./routes/index');
+const userRoutes = require('./routes/users');
 
 
 
@@ -81,10 +82,9 @@ app.use((req, res, next)=> {
   next();
 });
 
-
-
+app.use('/user', userRoutes);
 app.use('/', routes);
-app.use('/users', users);
+
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

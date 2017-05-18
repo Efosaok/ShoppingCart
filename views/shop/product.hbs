@@ -1,0 +1,21 @@
+
+<div class = "container-fluid">
+<h1 class = "text-center ">WELCOME TO EFOSA"S SHOPPING CART</h1>
+
+{{# each products}}
+<div class="row">
+
+{{# each this}}
+<div class="col-xs-3">
+    <div class="thumbnail">
+      <img src="{{this.imagePath}}" alt="font img">
+      <div class="caption">
+        <p>{{this.description}}<p>
+        <p name = "price">${{this.price}}</p>
+        <p><a href="/additem/{{this._id}}" class="btn btn-primary" role="button">ADD TO CART</a>
+      </div>
+    </div>
+  </div>
+{{/each}}
+</div>
+{{/each}}

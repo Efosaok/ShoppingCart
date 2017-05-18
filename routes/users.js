@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/users');
 const Products = require("../models/appproduct.js");
+const Cart = require("../models/OOPimplementation.js")
 
 
 // Register
@@ -25,7 +26,7 @@ router.get('/product', (req, res)=>{
 		for(let counter = 0;counter < unitSize;counter += unitSize){
 			productUnits.push(docs.slice(counter,counter + unitSize))
 		}
-		res.render("product",{title: "WELCOME",products : productUnits})
+		res.render("shop/product",{title: "WELCOME",products : productUnits})
 		console.log(productUnits)
 	})
 });
@@ -67,7 +68,7 @@ router.post('/register', (req, res)=>{
 
 		req.flash('success_msg', 'You are registered and can now login');
 
-		res.redirect('/users/login');
+		res.redirect('/user/login');
 	}
 });
 
@@ -101,9 +102,9 @@ passport.deserializeUser((id, done)=> {
 });
 //login route
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/users/product', failureRedirect:'/users/login',failureFlash: true}),
+  passport.authenticate('local', {successRedirect:'/user/product', failureRedirect:'/user/login',failureFlash: true}),
   (req, res)=> {
-    res.redirect('/users/product');
+    res.redirect('/user/product');
   });
 //logout route
 router.get('/logout', (req, res)=>{
@@ -111,7 +112,7 @@ router.get('/logout', (req, res)=>{
 
 	req.flash('success_msg', 'You are logged out');
 
-	res.redirect('/users/login');
+	res.redirect('/user/login');
 });
 //add item to cart route
 router.get("/additem/:id",(req,res)=>{
@@ -128,13 +129,7 @@ router.get("/additem/:id",(req,res)=>{
 		}
 	})	
 })
-router.get('/shopping-cart',(req, res, next)=> {
-   if (!req.session.cart) {
-       return res.render('/users/shopping', {products: null});
-   } 
-    let cart = new Cart(req.session.cart);
-    res.render('/users/shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice});
-});
+
 
 
 module.exports = router;
