@@ -1,21 +1,21 @@
-
-<div class = "container-fluid">
+s
 <h1 class = "text-center ">WELCOME TO EFOSA"S SHOPPING CART</h1>
 
 {{# each products}}
-<div class="row">
+<div class="row" id="catalog">
 
 {{# each this}}
 <div class="col-xs-3">
     <div class="thumbnail">
-      <img src="{{this.imagePath}}" alt="font img" style="height:auto">
+      <img src="{{this.imagePath}}" draggable="true" ondragstart="drag(event)" id="drag1">
       <div class="caption">
         <p>{{this.description}}<p>
         <p name = "price">${{this.price}}</p>
-        <p><a href="/additem/{{this._id}}" class="btn btn-primary" role="button"><span class="glyphicons glyphicons-cart-in"></span></a>
+        <a href="/additem/{{this._id}}"><span class="glyphicon glyphicon-shopping-cart" data-target ="#myModal"></span></a>
       </div>
     </div>
   </div>
 {{/each}}
+</div>
 </div>
 {{/each}}

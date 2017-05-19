@@ -9,19 +9,19 @@ const products = [
 	new Product({
 		imagePath : "http://res.cloudinary.com/dn93xk5ni/image/upload/v1494879250/images_2_pnbqci.jpg",
 		title : "Beats HeadSet",
-		description : "Fancy Pink Headset",
+		description : "Fancy Pink Headset by loraglario",
 		price : 20
 	}),
 	new Product({
 		imagePath : "http://res.cloudinary.com/dn93xk5ni/image/upload/v1494878603/double3_original_200sq_nso5fv.jpg",
 		title : "Armani lit up canvas",
-		description : "Litted up canvas",
+		description : "Litted up canvas ,latest in the industry",
 		price : 15
 	}),
 	new Product({
 		imagePath : "http://res.cloudinary.com/dn93xk5ni/image/upload/v1494879232/images_9_rye9y1.jpg",
 		title : "versace shoes",
-		description : "Office Shoes,versace",
+		description : "Office Shoes,versace ",
 		price : 17
 	}),
 	new Product({

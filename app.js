@@ -1,5 +1,7 @@
 
 //init modules
+const dotenv = require("dotenv");
+dotenv.load();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -14,10 +16,14 @@ const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const MongoStore = require("connect-mongo")(session);
 
+//configuring environmental variiables
+
+
 // Init App
 const app = express();
 //connect to mongoDB
-mongoose.connect("mongodb://efosaokpugie:swampious88@ds143231.mlab.com:43231/shoppp");
+
+mongoose.connect(process.env.DB_URL);
 const db = mongoose.connection;
 
 const routes = require('./routes/index');
@@ -39,8 +45,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
+
 app.use(session({
-    secret: 'secret',
+    secret: process.env.SECRET_KEY,
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({ mongooseConnection : mongoose.connection}),
