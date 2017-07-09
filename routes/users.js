@@ -4,9 +4,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/users');
-const Products = require("../models/appproduct.js");
-const Cart = require("../models/OOPimplementation.js")
-
 
 // Register
 router.get('/register', (req, res)=>{
@@ -17,20 +14,10 @@ router.get('/register', (req, res)=>{
 router.get('/login', (req, res)=>{
 	res.render('login');
 });
-//products page
-router.get('/product', (req, res)=>{
-	Products.find((err,docs)=>{
-		if (err) throw err;
-		let productUnits = [];
-		let unitSize = 20
-		for(let counter = 0;counter < unitSize;counter += unitSize){
-			productUnits.push(docs.slice(counter,counter + unitSize))
-		}
-		res.render("shop/product",{title: "WELCOME",products : productUnits})
-		console.log(productUnits)
-	})
-});
 
+router.get("/home",(req,res)=>{
+	res.render("index")
+})
 // Register User
 router.post('/register', (req, res)=>{
 	const name = req.body.name;
@@ -66,9 +53,9 @@ router.post('/register', (req, res)=>{
 			console.log(user);
 		});
 
-		req.flash('success_msg', 'You are registered and can now login');
+		req.flash('success_msg', 'You are now registered');
 
-		res.redirect('/user/login');
+		res.redirect('/users/home');
 	}
 });
 
@@ -100,34 +87,49 @@ passport.deserializeUser((id, done)=> {
     done(err, user);
   });
 });
-//login route
+
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/user/product', failureRedirect:'/user/login',failureFlash: true}),
+  passport.authenticate('local', {successRedirect:'/users/home', failureRedirect:'/users/login',failureFlash: true}),
   (req, res)=> {
-    res.redirect('/user/product');
+    res.redirect('users/home');
   });
-//logout route
+
 router.get('/logout', (req, res)=>{
 	req.logout();
 
 	req.flash('success_msg', 'You are logged out');
 
-	res.redirect('/user/login');
+	res.redirect('/users/login');
 });
-//add item to cart route
-router.get("/additem/:id",(req,res)=>{
-	let productId = req.params.id;
-	let cart = new Cart(req.session.cart ? req.session.cart:{});
-	
-	Products.findById(productId,(err,product)=>{
-		if(err){
-			return res.redirect("/")
-		}else{
-			cart.add(product,product.id);
-			req.session.cart = cart;
-			res.redirect("/")
-		}
-	})	
+
+const convertCurrencies = (currencyToConvert,convertToCurrency,Amount)=>{
+	let naira = {"dollar":0.0032,"euro":0.0028,"yen":0.36,"pounds":0.0024}
+	let dollar = {"naira":315.25,"euro":0.88,'yen':112.04,"pounds":0.77}
+	let pounds = {"yen":145.36,"euro":1.14,"dollar":1.30,"naira":409.10}
+	let euro = {"yen":127.73,"pounds":0.88,"dollar":1.14,"naira":359.48}
+	let yen = {"pounds":0.0069,"dollar":0.0089,"naira":2.82,"euro":0.0078}
+
+	if(currencyToConvert === "naira"){
+		return naira[convertToCurrency] * parseFloat(Amount)
+	}
+	else if(currencyToConvert === "dollar"){
+		return dollar[convertToCurrency] * parseFloat(Amount)
+	}
+	else if(currencyToConvert === "pounds"){
+		return pounds[convertToCurrency] * parseFloat(Amount)
+	}
+	else if (currencyToConvert === "euro"){
+		return euro[convertToCurrency] * parseFloat(Amount)
+	}
+	else{
+		return yen[convertToCurrency] * parseFloat(Amount)
+	}
+}
+router.get("/convertcurrency",(req,res)=>{
+	a = req.body.amount
+	b = req.body.myselect
+	c = req.body.myconvert
+	console.log(convertCurrencies(b,c,a))
 })
 
 module.exports = router;
